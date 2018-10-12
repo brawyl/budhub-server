@@ -1,5 +1,4 @@
 <?php
-$id = 0;
 $email = $_GET["email"];
 $pw = $_GET["pw"];
 
@@ -10,10 +9,12 @@ $st_check->execute();
 $rs = $st_check->get_result();
 
 if($rs->num_rows==0) {
+    $date = new DateTime();
+    $id= $date->getTimestamp();
     $st = $con->prepare("insert into users values(?,?,?)");
     $st->bind_param("iss",$id,$email,$pw);
     $st->execute();
     echo "1";
 } else {
-    echo"0";
+    echo "0";
 }
