@@ -1,7 +1,7 @@
 <?php
 
 $con = new mysqli("localhost","root","root","budhubdb");
-$st_check = $con->prepare("select distinct category from items");
+$st_check = $con->prepare("select distinct category from products");
 $st_check->execute();
 $rs = $st_check->get_result();
 $arr = array();
