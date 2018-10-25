@@ -10,11 +10,13 @@ $rs = $st_check->get_result();
 
 if($rs->num_rows==0) {
     $date = new DateTime();
-    $id= $date->getTimestamp();
+    $nums = substr($date->getTimestamp(), 0, 9);
+    $chars = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 3);
+    $id = $nums . $chars;
     $st = $con->prepare("insert into users values(?,?,?)");
-    $st->bind_param("iss",$id,$email,$pw);
+    $st->bind_param("sss",$id,$email,$pw);
     $st->execute();
-    echo "1";
+    echo $id;
 } else {
     echo "0";
 }

@@ -12,5 +12,6 @@ $rs = $st_check->get_result();
 if($rs->num_rows==0) {
     echo "0";
 } else {
-    echo "1";
+    $row=$rs->fetch_assoc();
+    echo $row["id"];
 }
