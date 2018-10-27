@@ -1,9 +1,12 @@
 <?php
+$credentials = parse_ini_file("config.ini");
+$user = $credentials["user"];
+$password = $credentials["password"];
+$con = new mysqli("localhost",$user,$password,"budhubdb");
 
 $email = $_GET["email"];
 $pw = $_GET["pw"];
 
-$con = new mysqli("localhost","root","root","budhubdb");
 $st_check = $con->prepare("select * from users where email=? and password=?");
 $st_check->bind_param("ss", $email, $pw);
 $st_check->execute();

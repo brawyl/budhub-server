@@ -1,7 +1,11 @@
 <?php
+$credentials = parse_ini_file("config.ini");
+$user = $credentials["user"];
+$password = $credentials["password"];
+$con = new mysqli("localhost",$user,$password,"budhubdb");
+
 $userid = $_GET["uid"];
 
-$con = new mysqli("localhost","root","root","budhubdb");
 $st_check = $con->prepare("select id, name, producer, description, price, image, qty, uid from temporder inner join products on products.id=temporder.pid where uid=?");
 $st_check->bind_param("s",$userid);
 $st_check->execute();

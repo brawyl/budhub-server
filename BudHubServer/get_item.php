@@ -1,7 +1,11 @@
 <?php
+$credentials = parse_ini_file("config.ini");
+$user = $credentials["user"];
+$password = $credentials["password"];
+$con = new mysqli("localhost",$user,$password,"budhubdb");
+
 $category = $_GET["id"];
 
-$con = new mysqli("localhost","root","root","budhubdb");
 $st = $con->prepare("select * from products where id=?");
 $st->bind_param("s",$category);
 $st->execute();

@@ -1,6 +1,9 @@
 <?php
+$credentials = parse_ini_file("config.ini");
+$user = $credentials["user"];
+$password = $credentials["password"];
+$con = new mysqli("localhost",$user,$password,"budhubdb");
 
-$con = new mysqli("localhost","root","root","budhubdb");
 $st_check = $con->prepare("select distinct category from products");
 $st_check->execute();
 $rs = $st_check->get_result();

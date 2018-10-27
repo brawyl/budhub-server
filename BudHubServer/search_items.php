@@ -1,4 +1,9 @@
 <?php
+$credentials = parse_ini_file("config.ini");
+$user = $credentials["user"];
+$password = $credentials["password"];
+$con = new mysqli("localhost",$user,$password,"budhubdb");
+
 $term = $_GET["term"];
 $sort = $_GET["sort"];
 
@@ -6,7 +11,6 @@ $sqlQuery = "select * from products where name like concat('%',?,'%') "
         . "or producer like concat('%',?,'%') "
         . "or description like concat('%',?,'%')";
 
-$con = new mysqli("localhost","root","root","budhubdb");
 $st = $con->prepare($sqlQuery);
 $st->bind_param("sss", $term, $term, $term);
 $st->execute();
