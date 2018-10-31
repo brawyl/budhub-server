@@ -14,5 +14,5 @@ $rs = $st_check->get_result();
 if($rs->num_rows==0) {
     echo "0";
 } else {
-    echo "1";
+    echo $rs->fetch_assoc()["id"];
 }
