@@ -4,12 +4,10 @@ $user = $credentials["user"];
 $password = $credentials["password"];
 $con = new mysqli("localhost",$user,$password,"budhubdb");
 
-$qty = $_GET["qty"];
-$lid = $_GET["lid"];
+$id = $_GET["id"];
 
-$st_check = $con->prepare("update temporder set qty=? where lineid=?");
-$st_check->bind_param("is", $qty, $lid);
-$st_check->execute();
-$rs = $st_check->get_result();
-
+$st = $con->prepare("delete from temporder where lid=?");
+$st->bind_param("s",$id);
+$st->execute();
+$rs = $st->get_result();
 echo "1";
