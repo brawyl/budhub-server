@@ -7,6 +7,10 @@ $con = new mysqli("localhost",$user,$password,"budhubdb");
 $order = $_GET["order"];
 $uid = $_GET["uid"];
 
+$st = $con->prepare("delete from temporder where uid=?");
+$st->bind_param("s",$uid);
+$st->execute();
+
 $orders = explode(";", $order);
 foreach($orders as $item) {
     $items = explode(":", $item);
