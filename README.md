@@ -14,10 +14,12 @@ scp -i linux2keypair.pem ~/workspace/mamp/budhub-server/BudHubServer/*.php ec2-u
 ### API Endpoints
 | Filename | Parameters |
 | ------ | ------ |
+| add_history.php | uid=USER_ID&tot=TOTAL&sum=SUMMARY&itm=ITEMS&date=DATE_STRING |
 | add_temp.php | pid=PRODUCT_ID&uid=USER_ID&qty=QUANTITY |
 | add_user.php | email=EMAIL&pw=PASSWORD |
 | del_temp.php | id=PRODUCT_ID+USER_ID |
 | get_cat.php | none |
+| get_history.php | uid=USER_ID |
 | get_item.php | id=PRODUCT_ID |
 | get_items.php | category=ITEM_CATEGORY |
 | get_temp.php | uid=USER_ID |
