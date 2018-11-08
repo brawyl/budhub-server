@@ -8,13 +8,13 @@ if ($con->connect_error) {
     echo $con->connect_error;
     
 } else {
-    $huid = $_POST["uid"];
+    $uid = $_POST["uid"];
     $htotal = $_POST["total"];
     $hsummary = $_POST["summary"];
     $hitem = $_POST["item"];
     $hdate = $_POST["date"];
     
-    if (!isset($huid) || strlen($huid) < 1 ||
+    if (!isset($uid) || strlen($uid) < 1 ||
         !isset($htotal) || strlen($htotal) < 1 ||
         !isset($hsummary) || strlen($hsummary) < 1 ||
         !isset($hitem) || strlen($hitem) < 1 ||
@@ -27,7 +27,7 @@ if ($con->connect_error) {
             echo "ERROR: There was a problem verifying the user ID";
 
         } else {
-            $st_check->bind_param("s", $huid);
+            $st_check->bind_param("s", $uid);
             $st_check->execute();
             $rs = $st_check->get_result();
 
@@ -37,14 +37,14 @@ if ($con->connect_error) {
             } else {
                 $date = new DateTime();
                 $nums = substr($date->getTimestamp(), 0, 9);
-                $hid = $huid . $nums;
+                $hid = $uid . $nums;
 
                 $st_check = $con->prepare("insert into history values(?,?,?,?,?,?,?)");
                 if (!$st_check) {
                     echo "ERROR: There was a problem querying the database";
 
                 } else {
-                    $st_check->bind_param("sssssss", $huid, $htotal, $hsummary, $hitem, $hdate, $nums, $hid);
+                    $st_check->bind_param("sssssss", $uid, $htotal, $hsummary, $hitem, $hdate, $nums, $hid);
                     $st_check->execute();
                     echo "OK";
 

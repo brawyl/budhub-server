@@ -9,11 +9,11 @@ if ($con->connect_error) {
     
 } else {
     $tpid = $_POST["pid"];
-    $tuid = $_POST["uid"];
+    $uid = $_POST["uid"];
     $tquantity = $_POST["quantity"];
     
     if (!isset($tpid) || strlen($tpid) < 1 ||
-        !isset($tuid) || strlen($tuid) < 1 ||
+        !isset($uid) || strlen($uid) < 1 ||
         !isset($tquantity) || strlen($tquantity) < 1) {
         echo "ERROR: Incorrectly formatted data";
         
@@ -23,7 +23,7 @@ if ($con->connect_error) {
             echo "ERROR: There was a problem verifying the user ID";
 
         } else {
-            $st_check->bind_param("s", $tuid);
+            $st_check->bind_param("s", $uid);
             $st_check->execute();
             $rs = $st_check->get_result();
 
@@ -31,14 +31,14 @@ if ($con->connect_error) {
                 echo "ERROR: Invalid user ID";
 
             } else {
-                $tlid = $tpid.$tuid;
+                $tlid = $tpid.$uid;
 
                 $st_check = $con->prepare("insert into temporder values(?,?,?,?)");
                 if (!$st_check) {
                     echo "ERROR: There was a problem querying the database";
 
                 } else {
-                    $st_check->bind_param("ssss", $tpid, $tuid, $tqty, $tlid);
+                    $st_check->bind_param("ssss", $tpid, $uid, $tquantity, $tlid);
                     $st_check->execute();
                     echo "OK";
 
