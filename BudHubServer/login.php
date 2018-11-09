@@ -4,17 +4,34 @@ $user = $credentials["user"];
 $password = $credentials["password"];
 $con = new mysqli("localhost",$user,$password,"budhubdb");
 
-$email = $_GET["email"];
-$pw = $_GET["pw"];
-
-$st_check = $con->prepare("select * from users where email=? and password=?");
-$st_check->bind_param("ss", $email, $pw);
-$st_check->execute();
-$rs = $st_check->get_result();
-
-if($rs->num_rows==0) {
-    echo "0";
+if ($con->connect_error) {
+    echo $con->connect_error;
+    
 } else {
-    $row=$rs->fetch_assoc();
-    echo $row["id"];
+    $email = $_POST["email"];
+    $pass = $_POST["pass"];
+
+    if (!isset($email) || strlen($email) < 1 ||
+        !isset($pass) || strlen($pass) < 1) {
+        echo "ERROR: Incorrectly formatted data";
+        
+    } else {
+        
+        $st_check = $con->prepare("select * from users where email=? and password=?");
+        if (!$st_check) {
+            echo "ERROR: There was a problem querying the database";
+
+        } else {
+            $st_check->bind_param("ss", $email, $pass);
+            $st_check->execute();
+            $rs = $st_check->get_result();
+
+            if($rs->num_rows==0) {
+                echo "0";
+            } else {
+                $row=$rs->fetch_assoc();
+                echo $row["id"];
+            }
+        }
+    }
 }

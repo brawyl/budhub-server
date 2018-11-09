@@ -9,8 +9,10 @@ if ($con->connect_error) {
     
 } else {
     $uid = $_POST["uid"];
+    $pid = $_POST["pid"];
 
-    if (!isset($uid) || strlen($uid) < 1) {
+    if (!isset($uid) || strlen($uid) < 1 ||
+        !isset($pid) || strlen($pid) < 1) {
         echo "ERROR: Incorrectly formatted data";
         
     } else {
@@ -28,12 +30,12 @@ if ($con->connect_error) {
                 echo "ERROR: Invalid user ID";
 
             } else {
-                $st_check = $con->prepare("select * from history where uid=? order by orderdate desc");
+                $st_check = $con->prepare("select * from reviews where productid=? order by reviewdate desc");
                 if (!$st_check) {
                     echo "There was a problem querying the database.";
 
                 } else {
-                    $st_check->bind_param("s",$uid);
+                    $st_check->bind_param("s",$pid);
                     $st_check->execute();
 
                     $rs = $st_check->get_result();
