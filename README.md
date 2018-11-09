@@ -12,21 +12,21 @@ $ ssh -i linux2keypair.pem ec2-user@ec2-54-164-68-76.compute-1.amazonaws.com
 scp -i linux2keypair.pem ~/workspace/mamp/budhub-server/BudHubServer/*.php ec2-user@ec2-54-164-68-76.compute-1.amazonaws.com:/var/www/html
 ```
 ### API Endpoints
-| Filename | Parameters |
+| Filename | HTTP Method: Parameters |
 | ------ | ------ |
-| add_history.php | uid=USER_ID&tot=TOTAL&sum=SUMMARY&itm=ITEMS&date=DATE_STRING |
-| add_temp.php | pid=PRODUCT_ID&uid=USER_ID&qty=QUANTITY |
-| add_user.php | email=EMAIL&pw=PASSWORD |
-| del_temp.php | id=PRODUCT_ID+USER_ID |
-| get_cat.php | none |
-| get_history.php | uid=USER_ID |
-| get_item.php | id=PRODUCT_ID |
-| get_items.php | category=ITEM_CATEGORY |
-| get_temp.php | uid=USER_ID |
+| add_history.php | POST: uid, total, summary, item, date |
+| add_review.php | POST: date, title, text, rating, author, uid, pid |
+| add_temp.php | POST: pid, uid, quantity |
+| add_user.php | POST: email, pass |
+| del_temp.php | POST: uid, lid |
+| get_cat.php | GET: none |
+| get_history.php | POST: uid |
+| get_item.php | GET: id |
+| get_items.php | GET: category |
+| get_reviews.php | POST: uid, pid |
+| get_temp.php | POST: uid |
 | index.php | none |
-| load_temp.php | order=PRODUCT_ID:QUANTITY;...&uid=USER_ID |
-| login.php | email=EMAIL&pw=PASSWORD |
-| search_items.php | term=SEARCH_TEXT&sort=FILTER_BY_FIELD |
-| social_login.php | email=EMAIL |
-### Todo
- - Convert endpoints to use POST instead of GET
+| load_temp.php | POST: order, uid |
+| login.php | POST: email, pass |
+| search_items.php | POST: uid, term, field|
+| social_login.php | POST: email |
