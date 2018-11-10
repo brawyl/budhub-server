@@ -22,7 +22,7 @@ scp -i linux2keypair.pem ~/workspace/mamp/budhub-server/BudHubServer/*.php ec2-u
 | get_cat.php | GET: none |
 | get_history.php | POST: uid |
 | get_item.php | GET: id |
-| get_items.php | GET: category |
+| get_products.php | GET: category |
 | get_reviews.php | POST: uid, pid |
 | get_temp.php | POST: uid |
 | index.php | none |
